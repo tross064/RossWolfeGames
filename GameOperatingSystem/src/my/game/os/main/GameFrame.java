@@ -11,5 +11,4 @@ public class GameFrame extends JFrame{
 		setVisible(true);
 	}
 	
-	//HELLO!!!
 }
