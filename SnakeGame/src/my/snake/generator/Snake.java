@@ -1,4 +1,4 @@
-package my.game.snake;
+package my.snake.generator;
 
 public class Snake {
 
