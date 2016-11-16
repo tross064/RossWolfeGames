@@ -27,17 +27,17 @@ public class Game {
 			}
 		}
 		
+		System.out.println("GAME START");
+		System.out.println("==================");
+		printBoard();
+		Thread.sleep(2000);
+		
 		while(true){
 			//Player 1 Moves
 			if(!checkAvalMoves()){
 				printEndScreen(' ');
 				break;
-			}
-			System.out.println("GAME START");
-			System.out.println("==================");
-			printBoard();
-			Thread.sleep(2000);
-			
+			}			
 			currMove = player1.move(board, XMARK, OMARK);
 			board[currMove.row][currMove.col] = currMove.mark;
 			printBoard();
