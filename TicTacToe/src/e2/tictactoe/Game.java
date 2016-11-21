@@ -12,7 +12,7 @@ package e2.tictactoe;
 public class Game {
 
 	static char board[][] = new char[3][3];
-	static Engine player1 = new RandomEngine();
+	static Engine player1 = new HumanEngine();
 	static Engine player2 = new RandomEngine();
 	
 	static Move currMove;
@@ -39,6 +39,7 @@ public class Game {
 				break;
 			}			
 			currMove = player1.move(board, XMARK, OMARK);
+			checkForLegalMove(currMove);
 			board[currMove.row][currMove.col] = currMove.mark;
 			printBoard();
 			Thread.sleep(2000);
@@ -53,6 +54,7 @@ public class Game {
 				break;
 			}
 			currMove = player2.move(board, OMARK, XMARK);
+			checkForLegalMove(currMove);
 			board[currMove.row][currMove.col] = currMove.mark;
 			printBoard();
 			Thread.sleep(2000);
@@ -63,6 +65,18 @@ public class Game {
 			
 		}//end while
 	}//end main()
+	
+	/**
+	 * Checks to see if engine's move is legal
+	 */
+	private static void checkForLegalMove(Move move) {
+	    
+	    // checks that square has not already been taken
+	    if (board[move.row][move.col] != ' ') {
+	        throw new IllegalArgumentException("Illegal Move!! Cheater!!");
+	    }
+	    
+	}
 	
 	/**
 	 * Checks to see if the player who just made a move won.
