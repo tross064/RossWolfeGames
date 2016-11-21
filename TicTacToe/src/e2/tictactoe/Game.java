@@ -39,7 +39,7 @@ public class Game {
 				break;
 			}			
 			currMove = player1.move(board, XMARK, OMARK);
-			checkForLegalMove(currMove);
+			checkForLegalMove(currMove, XMARK);
 			board[currMove.row][currMove.col] = currMove.mark;
 			printBoard();
 			Thread.sleep(2000);
@@ -54,7 +54,7 @@ public class Game {
 				break;
 			}
 			currMove = player2.move(board, OMARK, XMARK);
-			checkForLegalMove(currMove);
+			checkForLegalMove(currMove, OMARK);
 			board[currMove.row][currMove.col] = currMove.mark;
 			printBoard();
 			Thread.sleep(2000);
@@ -69,11 +69,15 @@ public class Game {
 	/**
 	 * Checks to see if engine's move is legal
 	 */
-	private static void checkForLegalMove(Move move) {
+	private static void checkForLegalMove(Move move, char playerMark) {
 	    
 	    // checks that square has not already been taken
 	    if (board[move.row][move.col] != ' ') {
 	        throw new IllegalArgumentException("Illegal Move!! Cheater!!");
+	    }
+	    
+	    if (move.mark != playerMark) {
+	        throw new IllegalArgumentException("Wrong mark, dummy!!");
 	    }
 	    
 	}
