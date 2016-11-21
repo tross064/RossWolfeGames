@@ -71,11 +71,18 @@ public class Game {
 	 */
 	private static void checkForLegalMove(Move move, char playerMark) {
 	    
+	    // checks that move row and columns are in bounds
+	    if (move.row < 0 || move.row > 2 || move.col < 0 || move.col > 2) {
+	        throw new IllegalArgumentException("row or col out of bounds!"
+	                + " Can't you count??");
+	    }
+	    
 	    // checks that square has not already been taken
 	    if (board[move.row][move.col] != ' ') {
 	        throw new IllegalArgumentException("Illegal Move!! Cheater!!");
 	    }
 	    
+	    // checks that correct mark was used
 	    if (move.mark != playerMark) {
 	        throw new IllegalArgumentException("Wrong mark, dummy!!");
 	    }
