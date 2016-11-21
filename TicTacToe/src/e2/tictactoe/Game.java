@@ -12,7 +12,7 @@ package e2.tictactoe;
 public class Game {
 
 	static char board[][] = new char[3][3];
-	static Engine player1 = new HumanEngine();
+	static Engine player1 = new ScottsEngine();
 	static Engine player2 = new RandomEngine();
 	
 	static Move currMove;
