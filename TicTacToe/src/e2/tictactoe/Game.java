@@ -2,7 +2,7 @@
  * The TTTGame programs implements a TicTacToe game. It allows two Engines to 
  * servers as the players.
  * 
- * @author Tyler Ross
+ * @author Tyler Ross, Scott Wolfe
  * @version 2.0
  * @since 2016-11-15
  */
@@ -12,7 +12,7 @@ package e2.tictactoe;
 public class Game {
 
 	static char board[][] = new char[3][3];
-	static Engine player1 = new ScottsEngine();
+	static Engine player1 = new RandomEngine();
 	static Engine player2 = new RandomEngine();
 	
 	static Move currMove;
@@ -20,51 +20,88 @@ public class Game {
 	final static char XMARK = 'x';
 	final static char OMARK = 'o';
 	
-	public static void main(String args[]) throws InterruptedException{
+	final static int PRINT_ON = 1;
+	final static int PRINT_OFF = 0;
+	
+	public static void main(String args[])  {
+	    runGame(PRINT_ON);
+	}
+	
+	public static char runGame(int printStatus) {
 		for(int i=0; i<3; i++){
 			for(int j=0; j<3; j++){
 				board[i][j]=' ';
 			}
 		}
 		
-		System.out.println("GAME START");
-		System.out.println("==================");
-		printBoard();
-		Thread.sleep(2000);
+		if (printStatus == PRINT_ON) {
+    		System.out.println("GAME START");
+    		System.out.println("==================");
+    		printBoard();
+    		try {
+    		    Thread.sleep(2000);
+    		} catch (InterruptedException e) {
+    		    e.printStackTrace();
+    		}
+		}
 		
 		while(true){
 			//Player 1 Moves
 			if(!checkAvalMoves()){
-				printEndScreen(' ');
-				break;
+			    
+			    if (printStatus == PRINT_ON) {
+			        printEndScreen(' ');
+			    }
+				return ' ';
 			}			
-			currMove = player1.move(board, XMARK, OMARK);
+			currMove = player1.move(copyBoard(board), XMARK, OMARK);
 			checkForLegalMove(currMove, XMARK);
 			board[currMove.row][currMove.col] = currMove.mark;
-			printBoard();
-			Thread.sleep(2000);
+			
+			if (printStatus == PRINT_ON) {
+    			printBoard();
+    			try {
+    	            Thread.sleep(2000);
+    	        } catch (InterruptedException e) {
+    	            e.printStackTrace();
+    	        }
+			}
 			if(checkForWin(XMARK)){
-				printEndScreen(XMARK);
-				break;
+			    if (printStatus == PRINT_ON) {
+			        printEndScreen(XMARK);
+			    }
+				return XMARK;
 			}
 			
 			//Player 2 Moves
 			if(!checkAvalMoves()){
-				printEndScreen(' ');
+			    if (printStatus == PRINT_ON) {
+			        printEndScreen(' ');
+			    }
 				break;
 			}
-			currMove = player2.move(board, OMARK, XMARK);
+			currMove = player2.move(copyBoard(board), OMARK, XMARK);
 			checkForLegalMove(currMove, OMARK);
 			board[currMove.row][currMove.col] = currMove.mark;
-			printBoard();
-			Thread.sleep(2000);
+			
+			if (printStatus == PRINT_ON) {
+    			printBoard();
+    			try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+			}
 			if(checkForWin(OMARK)){
-				printEndScreen(OMARK);
-				break;
+			    if (printStatus == PRINT_ON) {
+			        printEndScreen(OMARK);
+			    }
+				return OMARK;
 			}
 			
 		}//end while
-	}//end main()
+		return ' ';
+	}//end runGame()
 	
 	/**
 	 * Checks to see if engine's move is legal
@@ -156,5 +193,22 @@ public class Game {
 		output += "\n" + board[2][0]  + "|" + board[2][1] + "|" + board[2][2];
 		System.out.println(output);
 	}//end printBoard()
+	
+	/**
+	 * creates a copy of a board
+	 * 
+	 * @param board
+	 * @return
+	 */
+	private static char[][] copyBoard(char[][] board) {
+	    
+	    char[][] newBoard = new char[3][3];
+	    for (int i = 0; i < 3; i++) {
+	        for (int j = 0; j < 3; j++) {
+	            newBoard[i][j] = board[i][j];
+	        }
+	    }
+	    return newBoard;
+	}
 	
 }//end Game.java
