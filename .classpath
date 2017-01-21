@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="ConnectFour/src"/>
+	<classpathentry kind="src" path="MiniTennis/src"/>
+	<classpathentry kind="src" path="GameOperatingSystem/src"/>
+	<classpathentry kind="src" path="SnakeGame/src"/>
+	<classpathentry kind="src" path="TicTacToe/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="TicTacToe/bin"/>
+</classpath>
